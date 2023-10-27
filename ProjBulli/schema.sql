@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS posts;
+
+CREATE TABLE posts (
+    id INTEGER PRIMARY KEY,
+    val1 INTEGER,
+    val2 INTEGER
+);
+

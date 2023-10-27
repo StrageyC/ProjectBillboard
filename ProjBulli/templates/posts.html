@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+     
+
+
+    
+        <div class="posts">
+            
+            
+
+            <script>
+                
+            var pArr
+            $.ajax({ 
+                async: false,
+                url: '/postdata', 
+                type: 'GET', 
+                contentType: 'application/json', 
+                success: function(result) {
+                pArr = JSON.parse(result)
+                }
+      
+            });
+
+
+                        var id;
+                        for (x in pArr){
+                            id = x[0]
+                            id = parseInt(id) + 1
+                            $('.posts').append('<div id='+id+'><div id="mydivheader"> Post</div></div></br>');
+                           document.getElementById(id).style.position = "absolute"
+                        }
+                    
+                        
+
+
+                    
+            </script>
+            <script src="{{url_for('static', filename='billscript.js')}}"></script>
+        
+                
+        </div>
+
+
+
+    
+
+    
+
+{% endblock %}
