@@ -1,7 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-     
+    
+
+<form action="/upload/" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="inputFile">File input</label>
+        <input class="form-control-file" type="file" name="inputFile">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+
 
 
     
@@ -10,8 +22,8 @@
             
 
             <script>
-                
             var pArr
+        
             $.ajax({ 
                 async: false,
                 url: '/postdata', 
@@ -19,21 +31,23 @@
                 contentType: 'application/json', 
                 success: function(result) {
                 pArr = JSON.parse(result)
+            
                 }
       
             });
 
-
+            
                         var id;
                         for (x in pArr){
                             id = x[0]
                             id = parseInt(id) + 1
-                            $('.posts').append('<div id='+id+'><div id="mydivheader"> Post</div></div></br>');
+                            $('.posts').append('<div id='+id+'><div id="mydivheader"> </div></div></br>');
                            document.getElementById(id).style.position = "absolute"
+
                         }
                     
                         
-
+            
 
                     
             </script>

@@ -1,9 +1,15 @@
 import sqlite3
 import json
+import os
 from flask import Flask, render_template, request, url_for, flash, redirect, abort, jsonify
+from werkzeug.utils import secure_filename
+
+UPLOAD_FOLDER = '/Users/cstragey/desktop/ProjectBillboard/ProjBulli/static/images'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = 'your secret key'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def get_db_connection():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
@@ -70,5 +76,38 @@ def postdata():
     conn.close()
     return temp
 
-  
-# conn.execute('INSERT INTO posts (val1, val2 ) VALUES (?,?)', (pos1pos2))
+@app.route('/create/', methods=['GET', 'POST'])  
+def create():
+    if request.method == 'POST':
+        conn = get_db_connection()
+        conn.execute('INSERT INTO posts (val1, val2) VALUES (?, ?)', (100, 100))
+        conn.commit()
+        conn.close()
+        return render_template('posts.html')
+    
+def render_picture(data):
+
+    render_pic = base64.b64encode(data).decode('ascii') 
+    return render_pic
+    
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+
+@app.route('/upload/', methods=["POST"])
+def upload():
+    file = request.files['inputFile']
+    
+    if file.filename == '':
+        flash('No selected file')
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        file_database = file.filename
+        conn = get_db_connection()
+        conn.execute('INSERT INTO posts (val1, val2, picture) VALUES (?, ?, ?)', (100, 100, file_database ))
+        conn.commit()
+        conn.close()
+    return redirect("/")

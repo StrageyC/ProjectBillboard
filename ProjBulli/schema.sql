@@ -1,8 +1,11 @@
 DROP TABLE IF EXISTS posts;
 
+
 CREATE TABLE posts (
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     val1 INTEGER,
-    val2 INTEGER
+    val2 INTEGER,
+    picture TEXT
 );
+
 
