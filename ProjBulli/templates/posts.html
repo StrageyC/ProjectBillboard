@@ -1,57 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<div id="pop">
+
+</div>
     
 
-<form action="/upload/" method="POST" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="inputFile">File input</label>
-        <input class="form-control-file" type="file" name="inputFile">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-
-
-
+<div class = "contento" id = "content"></div>
 
 
 
     
-        <div class="posts">
+        <div id = "page" class="posts">
             
             
-
-            <script>
-            var pArr
-        
-            $.ajax({ 
-                async: false,
-                url: '/postdata', 
-                type: 'GET', 
-                contentType: 'application/json', 
-                success: function(result) {
-                pArr = JSON.parse(result)
-            
-                }
-      
-            });
-
-            
-                        var id;
-                        for (x in pArr){
-                            id = x[0]
-                            id = parseInt(id) + 1
-                            $('.posts').append('<div id='+id+'><div id="mydivheader"> </div></div></br>');
-                           document.getElementById(id).style.position = "absolute"
-
-                        }
-                    
-                        
-            
-
-                    
-            </script>
             <script src="{{url_for('static', filename='billscript.js')}}"></script>
+            
         
                 
         </div>
