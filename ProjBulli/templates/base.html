@@ -7,7 +7,25 @@
 </head>
 <body id="bodyid">
 
-
+    <div id="input">
+        <form action="/upload/" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="inputFile">File input: </label>
+                <input class="form-control-file" type="file" name="inputFile">
+            
+                <label for="inputText">Text input: </label>
+                <input class="content" type="text" name="inputText">
+            
+                <br>
+                <label for="inputSize">Input Size 0-10: </label>
+                <input class="content" type="number" name="inputSize" min="0" max="10" >
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+    
+        </form>
+    </div>
+    
 
 {% block content %}
 {% endblock %}
